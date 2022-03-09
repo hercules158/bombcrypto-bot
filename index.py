@@ -338,6 +338,12 @@ def login():
         return
 
     if clickBtn(images['connect-wallet'], timeout = 10):
+        logger('🎉 Connect game button detected!')
+        login_attempts = login_attempts + 1
+        #TODO mto ele da erro e poco o botao n abre
+        # time.sleep(10)
+
+    if clickBtn(images['connect-metamask'], timeout = 10):
         logger('🎉 Connect wallet button detected, logging in!')
         login_attempts = login_attempts + 1
         #TODO mto ele da erro e poco o botao n abre
@@ -480,16 +486,12 @@ def main():
     "login" : 0,
     "heroes" : 0,
     "new_map" : 0,
-    "check_for_captcha" : 0,
     "refresh_heroes" : 0
     }
     # =========
 
     while True:
         now = time.time()
-
-        if now - last["check_for_captcha"] > addRandomness(t['check_for_captcha'] * 60):
-            last["check_for_captcha"] = now
 
         if now - last["heroes"] > addRandomness(t['send_heroes_for_work'] * 60):
             last["heroes"] = now
